@@ -59,12 +59,5 @@ class MzituScrapyPipeline(ImagesPipeline):
         folder = strip(item['img_theme_name'])
         image_guid = request.url.split('/')[-1]
         # 拼接最终的文件名，格式：full/{folder}/{image_guid}.jpg
-        filename = u'full/{0}/{1}'.format(folder, image_guid)
+        filename = u'{0}/{1}'.format(folder, image_guid)
         return filename
-
-
-# class MzituScrapyPipeline(object):
-#     def process_item(self, item, spider):
-#         print(item['img_theme_name'])
-#         for img_url in item['all_img_urls_of_theme']:
-#             print(img_url)

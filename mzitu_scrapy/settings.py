@@ -57,7 +57,8 @@ ROBOTSTXT_OBEY = False
 DOWNLOADER_MIDDLEWARES = {
     'mzitu_scrapy.middlewares.RefererMiddleware': 543,
     'mzitu_scrapy.middlewares.RandomUserAgentMiddleware': 542,  # TODO how to set this value
-    # 'mzitu_scrapy.middlewares.ProxyMiddleware': 541,
+    # 'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
+    # 'mzitu_scrapy.middlewares.ProxyMiddleware': 100,
 }
 
 # Enable or disable extensions

@@ -63,7 +63,7 @@ from scrapy.downloadermiddlewares.useragent import UserAgentMiddleware
 class ProxyMiddleware(object):
     def process_request(self, request, spider):
         try:
-            request.meta['proxy'] = get_proxy_ip()
+            request.meta['proxy'] = 'http://' + get_proxy_ip()
         except Exception as error:
             print(error)
 
