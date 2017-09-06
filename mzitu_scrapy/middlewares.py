@@ -70,7 +70,19 @@ class ProxyMiddleware(object):
 
 class RandomUserAgentMiddleware(UserAgentMiddleware):
     def process_request(self, request, spider):
-        request.headers.setdefault('User-Agent', get_random_useragent())
+        request.headers['User-Agent'] = get_random_useragent()
+
+
+class RefererMiddleware(object):
+    def process_request(self, request, spider):
+        """设置headers和切换请求头
+        :param request: 请求体
+        :param spider: spider对象
+        :return: None
+        """
+        referer = request.meta.get('referer', None)
+        if referer:
+            request.headers['referer'] = referer
 
 
 def get_proxy_ip():

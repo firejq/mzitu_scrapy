@@ -20,8 +20,9 @@ def strip(filename):
 
 
 class MzituScrapyPipeline(ImagesPipeline):
-    def process_item(self, item, spider):
-        return item
+    # TODO 若不注释掉此方法，会导致下边的操作都失效，无法下载
+    # def process_item(self, item, spider):
+    #     return item
 
     def get_media_requests(self, item, info):
         """
@@ -33,6 +34,19 @@ class MzituScrapyPipeline(ImagesPipeline):
             referer = item['img_theme_url']
             yield Request(img_url, meta={'item': item,
                                          'referer': referer})
+
+    def item_completed(self, results, item, info):
+        """
+        :param results:
+        :param item:
+        :param info:
+        :return:
+        """
+        image_paths = [x['path'] for ok, x in results if ok]
+        if not image_paths:
+            raise DropItem("Item contains no images")
+        # item['image_paths'] = image_paths
+        return item
 
     def file_path(self, request, response=None, info=None):
         """
@@ -48,17 +62,6 @@ class MzituScrapyPipeline(ImagesPipeline):
         filename = u'full/{0}/{1}'.format(folder, image_guid)
         return filename
 
-    def item_completed(self, results, item, info):
-        """
-        :param results:
-        :param item:
-        :param info:
-        :return:
-        """
-        image_paths = [x['path'] for ok, x in results if ok]
-        if not image_paths:
-            raise DropItem("Item contains no images")
-        return item
 
 # class MzituScrapyPipeline(object):
 #     def process_item(self, item, spider):

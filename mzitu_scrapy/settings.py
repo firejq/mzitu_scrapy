@@ -54,10 +54,11 @@ ROBOTSTXT_OBEY = False
 # Enable or disable downloader middlewares
 # See
 # http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-# DOWNLOADER_MIDDLEWARES = {
-#     'mzitu_scrapy.middlewares.ProxyMiddleware': 543,
-#     'mzitu_scrapy.middlewares.RandomUserAgentMiddleware': 542,
-# }
+DOWNLOADER_MIDDLEWARES = {
+    'mzitu_scrapy.middlewares.RefererMiddleware': 543,
+    'mzitu_scrapy.middlewares.RandomUserAgentMiddleware': 542,  # TODO how to set this value
+    # 'mzitu_scrapy.middlewares.ProxyMiddleware': 541,
+}
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
@@ -68,8 +69,8 @@ ROBOTSTXT_OBEY = False
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    # 'mzitu_scrapy.pipelines.MzituScrapyPipeline': 300,
-    'scrapy.contrib.pipeline.images.ImagesPipeline': 1
+    'mzitu_scrapy.pipelines.MzituScrapyPipeline': 300,
+    # 'scrapy.contrib.pipeline.images.ImagesPipeline': 300
 }
 
 IMAGES_STORE = 'D:\\news_mzitu'
